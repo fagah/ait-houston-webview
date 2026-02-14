@@ -37,7 +37,7 @@ class _MyWebViewPageState extends State<MyWebViewPage> {
   void initState() {
     super.initState();
 
-    // Initialisation du contrôleur
+    // Initialisation du controleur
     _controller = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..setNavigationDelegate(
@@ -56,20 +56,17 @@ class _MyWebViewPageState extends State<MyWebViewPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('HOUSTON AIT App'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.refresh),
-            onPressed: () => _controller.reload(),
-          ),
-        ],
+      body: SafeArea(
+        child: Stack(
+          children: [
+            WebViewWidget(controller: _controller),
+            if (_isLoading) const Center(child: CircularProgressIndicator()),
+          ],
+        ),
       ),
-      body: Stack(
-        children: [
-          WebViewWidget(controller: _controller),
-          if (_isLoading) const Center(child: CircularProgressIndicator()),
-        ],
+      floatingActionButton: FloatingActionButton(
+        onPressed: _controller.reload,
+        child: const Icon(Icons.refresh),
       ),
     );
   }

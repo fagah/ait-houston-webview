@@ -1,4 +1,4 @@
-package com.example.ait_houston_webview
+package com.ait.houston
 
 import io.flutter.embedding.android.FlutterActivity
 
